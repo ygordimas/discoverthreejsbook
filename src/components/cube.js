@@ -1,9 +1,23 @@
-import { BoxGeometry, Mesh, MeshStandardMaterial, MathUtils } from "three";
+import {
+  BoxGeometry,
+  Mesh,
+  MeshStandardMaterial,
+  MathUtils,
+  TextureLoader,
+} from "three";
+
+function createMaterial() {
+  const textureLoader = new TextureLoader();
+  const texture = textureLoader.load("/dude.jpg");
+  const material = new MeshStandardMaterial({ map: texture });
+
+  return material;
+}
 
 function createCube() {
   const geometry = new BoxGeometry(2, 2, 2);
 
-  const material = new MeshStandardMaterial({ color: "purple" });
+  const material = createMaterial();
 
   const cube = new Mesh(geometry, material);
 
