@@ -4,10 +4,13 @@ import { createLights } from "../components/lights";
 import { createScene } from "../components/scene";
 import { createMeshGroup } from "../components/meshGroup";
 
+import { Train } from "../components/Train/Train";
+
 import { createRenderer } from "../systems/renderer";
 import { Resizer } from "../systems/Resizer";
 import { Loop } from "../systems/Loop";
 import { createControls } from "../systems/controls";
+import { createTrain } from "../components/train";
 
 let camera;
 let renderer;
@@ -28,13 +31,14 @@ class World {
     });
 
     const { hemisphereLight, mainLight } = createLights();
+    const train = new Train();
 
     // const cube = createCube();
     // loop.updatables.push(cube);
-    const meshGroup = createMeshGroup();
-    loop.updatables.push(controls, meshGroup);
+    // const meshGroup = createMeshGroup();
+    loop.updatables.push(controls, train);
 
-    scene.add(meshGroup, hemisphereLight, mainLight);
+    scene.add(hemisphereLight, mainLight, train);
 
     const resizer = new Resizer(camera, container, renderer);
   }
