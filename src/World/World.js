@@ -2,6 +2,7 @@ import { createCamera } from "../components/camera";
 import { createCube } from "../components/cube";
 import { createLights } from "../components/lights";
 import { createScene } from "../components/scene";
+import { createMeshGroup } from "../components/meshGroup";
 
 import { createRenderer } from "../systems/renderer";
 import { Resizer } from "../systems/Resizer";
@@ -26,13 +27,14 @@ class World {
       this.render();
     });
 
-    const cube = createCube();
-    const light = createLights();
+    const { hemisphereLight, mainLight } = createLights();
 
+    // const cube = createCube();
     // loop.updatables.push(cube);
-    // loop.updatables.push(controls);
+    const meshGroup = createMeshGroup();
+    loop.updatables.push(controls, meshGroup);
 
-    scene.add(cube, light);
+    scene.add(meshGroup, hemisphereLight, mainLight);
 
     const resizer = new Resizer(camera, container, renderer);
   }
